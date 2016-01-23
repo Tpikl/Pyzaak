@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import os
 from menus import Menus
+from player import Player
 
 #Start Here!
 def main():
@@ -8,10 +9,11 @@ def main():
 	print("A python Pazaak game")
 	print("May the Force be with you.\n")
 	print("--------\n")
-	print("Please enter your name: ")
-	playerName = input()
+	playerName = input("Please enter your name: ")
+	print("\n\n\n\n\n")
 
-	M = Menus(playerName)
+	P = Player(playerName)
+	M = Menus(P)
 	M.menu()
 
 main()
