@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import os
 import random
 from ai import AI
 
@@ -25,16 +24,16 @@ class Match(object):
 		#Draw cards
 		self.drawHands()
 		self.coin = random.getrandbits(1)
-		self.newRound(self.coin)
+		self.newRound()
 
-	def newRound(self, coin):
+	def newRound(self):
 		self.coin = not self.coin
 		self.Player.stand = 0
 		self.Enemy.stand = 0
 		self.Player.playedCards = []
 		self.Enemy.playedCards = []
 
-		if (self.coin):
+		if self.coin:
 			print("Player's turn")
 			self.turn(self.Player)
 		else:
@@ -43,15 +42,14 @@ class Match(object):
 
 	def turn(self, Player):
 		#Runs for each turn
-		self.clear()
-		
+
 		#Display current match info
 		self.displayScores()
 
-		if (Player.stand == 1):
+		if Player.stand == 1:
 			pass
 		else:
-			if (Player.id == 1):
+			if Player.id == 1:
 				#Handle AI turn if necessary
 				self.Enemy.playedCards.append(self.drawCard())
 				self.Enemy.stand = AI.determineAction(self.Enemy.score, self.Enemy.hand)
@@ -63,12 +61,12 @@ class Match(object):
 				self.Player.stand = self.displayChoices(0)
 
 		#Turn over - Check for end of round
-		if (self.Player.stand == 1 and self.Enemy.stand == 1):
+		if self.Player.stand == 1 and self.Enemy.stand == 1:
 			self.checkRoundWin(sum(self.Player.playedCards), sum(self.Enemy.playedCards))
 
 		#Start next turn
-		if (self.Player.score < 3 and self.Enemy.score < 3):
-			if (Player.id == 0):
+		if self.Player.score < 3 and self.Enemy.score < 3:
+			if Player.id == 0:
 				self.turn(self.Enemy)
 			else:
 				self.turn(self.Player)
@@ -78,17 +76,16 @@ class Match(object):
 			input(":")
 			from menus import Menus
 			M = Menus(self.Player)
-			self.clear()
 			M.menu()
 
 	def displayChoices(self, played):
-		if (played):
+		if played:
 			print("End | Stand\n")
 		else:
 			print("Play | End | Stand\n")
 
 		select = input(":").lower()
-		if (select == "play" and not played):
+		if select == "play" and not played:
 			return self.playCard()
 		elif select == "end":
 			return 0
@@ -99,16 +96,16 @@ class Match(object):
 			self.displayChoices(played)
 
 	def checkRoundWin(self, playerTotal, enemyTotal):
-		if (playerTotal  == 20 and enemyTotal == 20):
-			Print("Draw!")
-		elif ((playerTotal <= 20 and enemyTotal > 20) or (playerTotal <= 20 and enemyTotal < playerTotal)):
+		if playerTotal  == 20 and enemyTotal == 20:
+			print("Draw!")
+		elif (playerTotal <= 20 and enemyTotal > 20) or (playerTotal <= 20 and enemyTotal < playerTotal):
 			self.Player.score += 1
-		elif ((enemyTotal <= 20 and playerTotal > 20) or (enemyTotal <= 20 and playerTotal < enemyTotal)):
+		elif (enemyTotal <= 20 and playerTotal > 20) or (enemyTotal <= 20 and playerTotal < enemyTotal):
 			self.Enemy.score += 1
 		else:
 			print("idk, deal with this if it happens..")
 
-		self.newRound(self.coin)
+		self.newRound()
 
 	def playCard(self):
 		#Used to play a card
@@ -146,7 +143,3 @@ class Match(object):
 		print("--Hand-------")
 		print(self.Player.hand)
 		print("-----------")
-	
-	def clear(self):
-		for x in range(0,10):
-			print("\n")

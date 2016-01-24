@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import os
 from menus import Menus
 from player import Player
 

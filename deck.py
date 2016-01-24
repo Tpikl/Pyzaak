@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import os
 
 class Deck(object):
 	def __init__(self, name):

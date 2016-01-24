@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import os
 from match import Match
 from ai import AI
 
