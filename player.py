@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import os
-
 from deck import Deck
 
 class Player(object):

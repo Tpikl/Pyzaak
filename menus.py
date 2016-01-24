@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import os
-
-from duel import Duel
+from match import Match
 from ai import AI
 
 class Menus(object):
@@ -14,25 +13,28 @@ class Menus(object):
 		#Print the options
 		print("Pazaak Menu")
 		print("---------")
-		print("1 - Play")
-		print("2 - Deck")
-		print("0 - Exit")
-		menuSelect = input(": ")
+		print("Play")
+		print("Deck")
+		print("Test")
+		print("Quit")
+		menuSelect = input(":").lower()
 
-		if menuSelect == '1':
-			self.duel()
-		elif menuSelect == '2':
+		if menuSelect == 'play' or menuSelect[0] == 'p':
+			self.match()
+		elif menuSelect == 'deck' or menuSelect[0] == 'd':
 			self.viewDeck()
-		elif menuSelect == '0':
+		elif menuSelect == 'test' or menuSelect[0] == 't':
+			self.test()
+		elif menuSelect == 'quit' or menuSelect[0] == 'q':
 			print("Thanks for playing!")
 			exit()
 		else:
 			print("Invalid entry")
 			self.menu()
 	
-	def duel(self):	
-		d = Duel(self.Player, AI())
-		d.main()
+	def match(self):	
+		m = Match(self.Player, AI())
+		m.main()
 	
 	def viewDeck(self):
 		print("View Deck")
@@ -40,3 +42,7 @@ class Menus(object):
 
 		input(":")
 		self.menu()
+
+	def test(self):
+		#I use this to test small snippets of code quickly
+		pass

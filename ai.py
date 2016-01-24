@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import os
-
 from deck import Deck
 
 class AI(object):
@@ -10,7 +9,8 @@ class AI(object):
 	
 	def determineAction(self, score, *hand):
 		#Handle it in here somehow
-		print(hand)
+		print("-Enemy Stands-")
+		return 1
 
 	def chooseCard(self, score, *hand):
 		#If AI chooses to play a card, determine which card is best here
