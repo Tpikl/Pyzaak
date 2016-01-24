@@ -36,14 +36,13 @@ class Duel(object):
 		#Runs for each turn
 		self.clear()
 		
-
 		#Display current duel info
 		self.displayScores()
 
 		#Handle AI turn if necessary
 		if (Player.id == 1):
 			self.Enemy.playedCards.append(self.drawCard())
-			AI.determineAction(self.Enemy.score, self.Enemy.Deck.hand)
+			AI.determineAction(self.Enemy.score, self.Enemy.hand)
 		else:
 			turn = 1
 
@@ -52,9 +51,17 @@ class Duel(object):
 			self.showHand()
 
 			while turn:
-				print("Play [card index]  |  End Turn | Stand")
+				print("Play | End | Stand")
 				select = input(": ").lower()
-				if select == "end turn":
+				if select == "play":
+					index = input("Card Index: ")
+					card = self.Player.hand[int(index)] 
+
+					if card != 0:
+						self.Player.playedCards.append(card)
+						self.Player.hand[int(index)] = 0
+						self.displayPlayedCards()
+				elif select == "end":
 					turn = self.endTurn()
 				elif select == "stand":
 					self.stand()
@@ -77,7 +84,7 @@ class Duel(object):
 
 	def showHand(self):
 		print("--Hand-------")
-		print(self.Player.Deck.hand)
+		print(self.Player.hand)
 		print("-----------")
 
 	def playCard(self):
@@ -86,8 +93,8 @@ class Duel(object):
 
 	def drawHands(self):
 		#Draw player's hand of 4 cards
-		self.Player.Deck.hand = [1,3,-4,5]
-		self.Enemy.Deck.hand = [1,2,4,-1]
+		self.Player.hand = [1,3,-4,5]
+		self.Enemy.hand = [1,2,4,-1]
 	
 	def drawCard(self):
 		#Standard draw at the beginning of each player's turn
