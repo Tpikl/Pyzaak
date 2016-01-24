@@ -75,7 +75,11 @@ class Match(object):
 		else:
 			print("Game Over")
 			print("Winner: "+ self.Player.name) if (self.Player.score == 3) else print("Winner: "+ self.Enemy.name)
-			#Load back to main menu
+			input(":")
+			from menus import Menus
+			M = Menus(self.Player)
+			self.clear()
+			M.menu()
 
 	def displayChoices(self, played):
 		if (played):
