@@ -34,7 +34,7 @@ class Match(object):
 		self.Player.playedCards = []
 		self.Enemy.playedCards = []
 
-		if (0):
+		if (self.coin):
 			print("Player's turn")
 			self.turn(self.Player)
 		else:
