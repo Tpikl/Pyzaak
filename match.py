@@ -5,24 +5,24 @@ from deck import Deck
 
 
 class Match(object):
-    def __init__(self, Player, Enemy):
+    def __init__(self, Player, Computer):
         self.Player = Player
-        self.Enemy = Enemy
+        self.Computer = Computer
         self.Player.id = 0
-        self.Enemy.id = 1
+        self.Computer.id = 1
         self.Player.stand = 0
-        self.Enemy.stand = 0
+        self.Computer.stand = 0
         self.Player.score = 0
-        self.Enemy.score = 0
+        self.Computer.score = 0
         self.Player.playedCards = []
-        self.Enemy.playedCards = []
+        self.Computer.playedCards = []
         self.Player.hand = []
-        self.Enemy.hand = []
+        self.Computer.hand = []
         self.coin = 0
         self.masterDeck = Deck("Deck", True)
 
     def main(self):
-        print("Players: " + self.Player.name + " vs " + self.Enemy.name)
+        print("Players: " + self.Player.name + " vs " + self.Computer.name)
 
 
         # Draw cards
@@ -33,16 +33,16 @@ class Match(object):
     def newRound(self):
         self.coin = not self.coin
         self.Player.stand = 0
-        self.Enemy.stand = 0
+        self.Computer.stand = 0
         self.Player.playedCards = []
-        self.Enemy.playedCards = []
+        self.Computer.playedCards = []
 
         if self.coin:
             print("Player's turn")
             self.turn(self.Player)
         else:
-            print("Enemy's turn")
-            self.turn(self.Enemy)
+            print("Computer's turn")
+            self.turn(self.Computer)
 
     def turn(self, Player):
         # Runs for each turn
@@ -57,8 +57,8 @@ class Match(object):
         else:
             if Player.id == 1:
                 # Handle AI turn if necessary
-                self.Enemy.playedCards.append(self.masterDeck.drawCard())
-                self.Enemy.stand = AI.determineAction(self.Enemy.score, self.Enemy.hand)
+                self.Computer.playedCards.append(self.masterDeck.drawCard())
+                self.Computer.stand = AI.determineAction(self.Computer.score, self.Computer.hand)
             else:
                 self.Player.playedCards.append(self.masterDeck.drawCard())
                 self.displayPlayedCards()
@@ -67,18 +67,18 @@ class Match(object):
                 self.Player.stand = self.displayChoices(0)
 
         # Turn over - Check for end of round
-        if self.Player.stand == 1 and self.Enemy.stand == 1:
-            self.checkRoundWin(sum(self.Player.playedCards), sum(self.Enemy.playedCards))
+        if self.Player.stand == 1 and self.Computer.stand == 1:
+            self.checkRoundWin(sum(self.Player.playedCards), sum(self.Computer.playedCards))
 
         # Start next turn
-        if self.Player.score < 3 and self.Enemy.score < 3:
+        if self.Player.score < 3 and self.Computer.score < 3:
             if Player.id == 0:
-                self.turn(self.Enemy)
+                self.turn(self.Computer)
             else:
                 self.turn(self.Player)
         else:
             print("Game Over")
-            print("Winner: " + self.Player.name) if (self.Player.score == 3) else print("Winner: " + self.Enemy.name)
+            print("Winner: " + self.Player.name) if (self.Player.score == 3) else print("Winner: " + self.Computer.name)
             input(":")
             from menus import Menus
             M = Menus(self.Player)
@@ -108,7 +108,7 @@ class Match(object):
         elif (playerTotal <= 20 and enemyTotal > 20) or (playerTotal <= 20 and enemyTotal < playerTotal):
             self.Player.score += 1
         elif (enemyTotal <= 20 and playerTotal > 20) or (enemyTotal <= 20 and playerTotal < enemyTotal):
-            self.Enemy.score += 1
+            self.Computer.score += 1
         else:
             print("idk, deal with this if it happens..")
 
@@ -130,12 +130,12 @@ class Match(object):
             self.playCard()
 
     def displayScores(self):
-        print("--" + str(self.Player.score) + "---- " + self.Player.name + " -V- " + self.Enemy.name + " ----" + str(
-            self.Enemy.score) + "--")
+        print("--" + str(self.Player.score) + "---- " + self.Player.name + " -V- " + self.Computer.name + " ----" + str(
+            self.Computer.score) + "--")
 
     def displayPlayedCards(self):
-        print(str(sum(self.Player.playedCards)) + "   |   " + str(sum(self.Enemy.playedCards)))
-        print(str(self.Player.playedCards) + "-|-" + str(self.Enemy.playedCards))
+        print(str(sum(self.Player.playedCards)) + "   |   " + str(sum(self.Computer.playedCards)))
+        print(str(self.Player.playedCards) + "-|-" + str(self.Computer.playedCards))
         print("\n")
 
     def showHand(self):
