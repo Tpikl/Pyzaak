@@ -4,7 +4,7 @@ from deck import Deck
 class AI(object):
 	def __init__(self):
 		self.name = "AI"
-		self.Deck = Deck("AI-Deck")
+		self.Deck = Deck("AI-Deck", True)
 	
 	def determineAction(self, score, *hand):
 		#Handle it in here somehow

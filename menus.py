@@ -54,4 +54,4 @@ class Menus(object):
 
 	def test(self):
 		#I use this to test small snippets of code quickly
-		pass
+		print("testies")
