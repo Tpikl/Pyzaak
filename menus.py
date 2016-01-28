@@ -2,6 +2,7 @@
 from match import Match
 from ai import AI
 
+
 class Menus(object):
 	def __init__(self, Player):
 		self.Player = Player
@@ -14,6 +15,7 @@ class Menus(object):
 		print("---------")
 		print("Play")
 		print("Deck")
+		print("How to Play")
 		print("Test")
 		print("Quit")
 		menuSelect = input(":").lower()
@@ -22,6 +24,8 @@ class Menus(object):
 			self.match()
 		elif menuSelect == 'deck' or menuSelect[0] == 'd':
 			self.viewDeck()
+		elif menuSelect == 'how to play' or menuSelect[0] == 'h':
+			self.howPlay()
 		elif menuSelect == 'test' or menuSelect[0] == 't':
 			self.test()
 		elif menuSelect == 'quit' or menuSelect[0] == 'q':
@@ -34,13 +38,19 @@ class Menus(object):
 	def match(self):	
 		m = Match(self.Player, AI())
 		m.main()
-	
+
 	def viewDeck(self):
 		print("View Deck")
 		self.Player.Deck.listDeck()
 
 		input(":")
 		self.menu()
+
+	def howPlay(self):
+		from howPlay import howPlay
+		h = howPlay()
+		h.howAbout()
+
 
 	def test(self):
 		#I use this to test small snippets of code quickly
