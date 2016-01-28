@@ -26,7 +26,7 @@ class Match(object):
 
 
         # Draw cards
-        self.drawHands()
+        self.Player.Deck.drawHand()
         self.coin = random.getrandbits(1)
         self.newRound()
 
@@ -137,12 +137,7 @@ class Match(object):
         print(str(self.Player.playedCards) + "-|-" + str(self.Enemy.playedCards))
         print("\n")
 
-    def drawHands(self):
-        # Draw player's hand of 4 cards
-        self.Player.hand = [1, 3, -4, 5]
-        self.Enemy.hand = [1, 2, 4, -1]
-
     def showHand(self):
         print("--Hand-------")
-        print(self.Player.hand)
+        print(self.Player.Deck.hand)
         print("-----------")
