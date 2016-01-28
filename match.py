@@ -90,12 +90,13 @@ class Match(object):
         else:
             print("Play | End | Stand\n")
 
-        select = input(":").lower()
-        if select == "play" and not played:
+        playerSelect = input(":").lower()
+
+        if playerSelect == "play" or playerSelect[0] == 'p' and not played:
             return self.playCard()
-        elif select == "end":
+        elif playerSelect == "end" or playerSelect[0] == 'e':
             return 0
-        elif select == "stand":
+        elif playerSelect == "stand" or playerSelect[0] == 's':
             return 1
         else:
             print("Invalid")
