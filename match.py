@@ -92,7 +92,7 @@ class Match(object):
 
         playerSelect = input(":").lower()
 
-        if playerSelect == "play" or playerSelect[0] == 'p' and not played:
+        if (playerSelect == "play" or playerSelect[0] == 'p') and not 0:
             return self.playCard()
         elif playerSelect == "end" or playerSelect[0] == 'e':
             return 0
